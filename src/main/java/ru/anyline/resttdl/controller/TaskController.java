@@ -1,5 +1,7 @@
 package ru.anyline.resttdl.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +14,14 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tasks")
+@Tag(name = "Task Management", description = "API for managing tasks")
 public class TaskController {
 
     @Autowired
     private TaskRepository repository;
 
     @GetMapping
+    @Operation(summary = "Get all tasks", description = "Retrieve a list of all tasks, with optional filtering and sorting")
     public List<Task> getAllTasks(
             @RequestParam(required = false) Boolean completed,
             @RequestParam(required = false) String sortBy){
@@ -33,6 +37,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get task by ID")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id){
         Optional<Task> task = repository.findById(id);
         return task.map(ResponseEntity::ok)
@@ -40,12 +45,14 @@ public class TaskController {
     }
 
     @PostMapping
+    @Operation(summary = "Create a new task")
     public ResponseEntity<Task> createTask(@RequestBody Task task){
         Task savedTask = repository.save(task);
         return ResponseEntity.ok(savedTask);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update a task")
     public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task updatetTask) {
         Optional<Task> task = repository.findById(id);
 
@@ -53,7 +60,7 @@ public class TaskController {
             Task var = task.get();
             var.setTitle(updatetTask.getTitle());
             var.setDescription(updatetTask.getDescription());
-            var.setIsCompleted(updatetTask.getIsCompleted());
+            var.setCompleted(updatetTask.getCompleted());
             return ResponseEntity.ok(repository.save(var));
 
         } else {
@@ -63,6 +70,7 @@ public class TaskController {
 
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a task")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id){
         Optional<Task> task = repository.findById(id);
 

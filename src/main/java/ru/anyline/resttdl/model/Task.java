@@ -22,7 +22,7 @@ public class Task {
     private String description;
 
     @Column(nullable = false)
-    private Boolean isCompleted = false;
+    private Boolean completed = false;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
