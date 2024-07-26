@@ -1,6 +1,7 @@
 package ru.anyline.resttdl.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.anyline.resttdl.model.Task;
@@ -17,12 +18,22 @@ public class TaskController {
     private TaskRepository repository;
 
     @GetMapping
-    public List<Task> getAllTasks(){
-        return repository.findAll();
+    public List<Task> getAllTasks(
+            @RequestParam(required = false) Boolean completed,
+            @RequestParam(required = false) String sortBy){
+
+        Sort sort = Sort.by("createdAt");
+        if ("title".equalsIgnoreCase(sortBy)) {
+            sort = Sort.by("title");
+        }
+        if (completed != null) {
+            return repository.findByCompleted(completed, sort);
+        }
+        return repository.findAll(sort);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getTaskByID(@PathVariable Long id){
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id){
         Optional<Task> task = repository.findById(id);
         return task.map(ResponseEntity::ok)
                         .orElseGet(() -> ResponseEntity.notFound().build());

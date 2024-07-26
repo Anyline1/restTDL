@@ -2,6 +2,9 @@ package ru.anyline.resttdl.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -13,9 +16,14 @@ public class Task {
     private Long Id;
 
     @Column(nullable = false)
+//    @NotBlank(message = "Title is mandatory")
     private String title;
+
     private String description;
 
     @Column(nullable = false)
     private Boolean isCompleted = false;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }
