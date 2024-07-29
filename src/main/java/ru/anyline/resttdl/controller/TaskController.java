@@ -20,8 +20,13 @@ public class TaskController {
     @Autowired
     private TaskRepository repository;
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @GetMapping
-    @Operation(summary = "Get all tasks", description = "Retrieve a list of all tasks, with optional filtering and sorting")
+//    @Operation(summary = "Get all tasks", description = "Retrieve a list of all tasks, with optional filtering and sorting")
     public List<Task> getAllTasks(
             @RequestParam(required = false) Boolean completed,
             @RequestParam(required = false) String sortBy){
