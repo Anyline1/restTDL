@@ -8,7 +8,7 @@ import ru.anyline.resttdl.service.CompanyService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/publishers")
+@RequestMapping("/api/companies")
 public class CompanyController {
 
     private final CompanyService companyService;
