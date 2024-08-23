@@ -13,8 +13,8 @@ public class SpringDocConfig {
         return new OpenAPI()
                 .components(new Components())
                 .info(new Info()
-                        .title("Task Management API")
-                        .version("1.0")
-                        .description("API for managing tasks"));
+                        .title("")
+                        .version("")
+                        .description(""));
     }
 }
