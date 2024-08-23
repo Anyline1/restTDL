@@ -9,9 +9,7 @@ import ru.anyline.resttdl.model.Store;
 public interface StoreMapper {
 
     StoreMapper INSTANCE = Mappers.getMapper(StoreMapper.class);
-
     StoreDTO toStoreDTO(Store store);
-
     Store toStore(StoreDTO storeDTO);
 
 
