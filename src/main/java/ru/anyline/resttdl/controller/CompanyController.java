@@ -2,6 +2,7 @@ package ru.anyline.resttdl.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.anyline.resttdl.DTO.CompanyDTO;
 import ru.anyline.resttdl.model.Company;
 import ru.anyline.resttdl.service.CompanyService;
 
@@ -18,34 +19,34 @@ public class CompanyController {
     }
 
     @GetMapping
-    public List<Company> getAllPublishers() {
+    public List<CompanyDTO> getAllComps() {
         return companyService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Company> getPublisherById(@PathVariable Long id) {
+    public ResponseEntity<CompanyDTO> getCompsById(@PathVariable Long id) {
         return companyService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Company createPublisher(@RequestBody Company company) {
-        return companyService.save(company);
+    public CompanyDTO createCompany(@RequestBody CompanyDTO companyDTO) {
+        return companyService.save(companyDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Company> updatePublisher(@PathVariable Long id, @RequestBody Company company) {
+    public ResponseEntity<CompanyDTO> updateCompany(@PathVariable Long id, @RequestBody CompanyDTO companyDTO) {
         return companyService.findById(id)
                 .map(existingCompany -> {
-                    existingCompany.setName(company.getName());
+                    existingCompany.setName(companyDTO.getName());
                     return ResponseEntity.ok(companyService.save(existingCompany));
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePublisher(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
         if (companyService.findById(id).isPresent()) {
             companyService.deleteById(id);
             return ResponseEntity.noContent().build();

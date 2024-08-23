@@ -1,11 +1,17 @@
 package ru.anyline.resttdl.service;
 
 import org.springframework.stereotype.Service;
+import ru.anyline.resttdl.DTO.ApplicationDTO;
+import ru.anyline.resttdl.DTO.CompanyDTO;
+import ru.anyline.resttdl.mapper.ApplicationMapper;
+import ru.anyline.resttdl.mapper.CompanyMapper;
+import ru.anyline.resttdl.model.Application;
 import ru.anyline.resttdl.model.Company;
 import ru.anyline.resttdl.repository.CompanyRepo;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyService {
@@ -16,16 +22,21 @@ public class CompanyService {
         this.companyRepo = companyRepo;
     }
 
-    public List<Company> findAll() {
-        return companyRepo.findAll();
+    public List<CompanyDTO> findAll() {
+        return companyRepo.findAll()
+                .stream()
+                .map(CompanyMapper.INSTANCE::toCompanyDTO)
+                .collect(Collectors.toList());
     }
 
-    public Optional<Company> findById(Long id) {
-        return companyRepo.findById(id);
+    public Optional<CompanyDTO> findById(Long id) {
+        return companyRepo.findById(id)
+                .map(CompanyMapper.INSTANCE::toCompanyDTO);
     }
 
-    public Company save(Company company) {
-        return companyRepo.save(company);
+    public CompanyDTO save(CompanyDTO companyDTO) {
+        Company company = CompanyMapper.INSTANCE.toCompany(companyDTO);
+        return CompanyMapper.INSTANCE.toCompanyDTO(companyRepo.save(company));
     }
 
     public void deleteById(Long id) {
