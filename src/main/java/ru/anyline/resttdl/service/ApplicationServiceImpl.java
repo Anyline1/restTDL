@@ -26,7 +26,7 @@ public class ApplicationServiceImpl implements ApplicationService{
                .map(ApplicationMapper.INSTANCE::toApplicationDTO)
                 .collect(Collectors.toList());
     }
-    
+
     @Override
     public Optional<ApplicationDTO> findById(Long id) {
         return applicationRepo.findById(id)

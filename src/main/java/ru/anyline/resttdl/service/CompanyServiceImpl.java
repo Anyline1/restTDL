@@ -13,10 +13,11 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class CompanyServiceImpl {
+public class CompanyServiceImpl implements CompanyService{
 
     private final CompanyRepo companyRepo;
 
+    @Override
     public List<CompanyDTO> findAll() {
         return companyRepo.findAll()
                 .stream()
@@ -24,16 +25,19 @@ public class CompanyServiceImpl {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public Optional<CompanyDTO> findById(Long id) {
         return companyRepo.findById(id)
                 .map(CompanyMapper.INSTANCE::toCompanyDTO);
     }
 
+    @Override
     public CompanyDTO save(CompanyDTO companyDTO) {
         Company company = CompanyMapper.INSTANCE.toCompany(companyDTO);
         return CompanyMapper.INSTANCE.toCompanyDTO(companyRepo.save(company));
     }
 
+    @Override
     public void deleteById(Long id) {
         companyRepo.deleteById(id);
     }

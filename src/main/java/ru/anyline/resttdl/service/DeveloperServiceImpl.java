@@ -13,10 +13,11 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class DeveloperServiceImpl {
+public class DeveloperServiceImpl implements DeveloperService{
 
     private final DeveloperRepo developerRepo;
 
+    @Override
     public List<DeveloperDTO> findAll() {
         return developerRepo.findAll()
                 .stream()
@@ -24,16 +25,24 @@ public class DeveloperServiceImpl {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public Optional<DeveloperDTO> findById(Long id) {
         return developerRepo.findById(id)
                 .map(DeveloperMapper.INSTANCE::toDeveloperDTO);
     }
 
+    @Override
     public DeveloperDTO save(DeveloperDTO developerDTO) {
         Developer developer = DeveloperMapper.INSTANCE.toDeveloper(developerDTO);
         return DeveloperMapper.INSTANCE.toDeveloperDTO(developerRepo.save(developer));
     }
 
+    @Override
+    public void deleteAll() {
+        developerRepo.deleteAll();
+    }
+
+    @Override
     public void deleteById(Long id) {
         developerRepo.deleteById(id);
     }

@@ -14,10 +14,11 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class StoreServiceImpl {
+public class StoreServiceImpl implements StoreService {
 
     private final StoreRepo storeRepo;
 
+    @Override
     public List<StoreDTO> findAll() {
         return storeRepo.findAll()
                 .stream()
@@ -25,17 +26,22 @@ public class StoreServiceImpl {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public Optional<StoreDTO> findById(Long id) {
         return storeRepo.findById(id)
                 .map(StoreMapper.INSTANCE::toStoreDTO);
     }
 
+
+    @Override
     public StoreDTO save(StoreDTO storeDTO) {
         Store store = StoreMapper.INSTANCE.toStore(storeDTO);
         return StoreMapper.INSTANCE.toStoreDTO(storeRepo.save(store));
     }
 
+    @Override
     public void deleteById(Long id) {
         storeRepo.deleteById(id);
     }
+
 }
