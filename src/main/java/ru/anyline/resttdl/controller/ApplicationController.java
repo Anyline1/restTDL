@@ -3,8 +3,7 @@ package ru.anyline.resttdl.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.anyline.resttdl.DTO.ApplicationDTO;
-import ru.anyline.resttdl.model.Application;
-import ru.anyline.resttdl.service.ApplicationService;
+import ru.anyline.resttdl.service.ApplicationServiceImpl;
 
 import java.util.List;
 
@@ -12,9 +11,9 @@ import java.util.List;
 @RequestMapping("/api/applications")
 public class ApplicationController {
 
-    private final ApplicationService applicationService;
+    private final ApplicationServiceImpl applicationService;
 
-    public ApplicationController(ApplicationService applicationService) {
+    public ApplicationController(ApplicationServiceImpl applicationService) {
         this.applicationService = applicationService;
     }
 

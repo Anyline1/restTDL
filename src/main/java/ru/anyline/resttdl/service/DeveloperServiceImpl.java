@@ -2,11 +2,8 @@ package ru.anyline.resttdl.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.anyline.resttdl.DTO.ApplicationDTO;
 import ru.anyline.resttdl.DTO.DeveloperDTO;
-import ru.anyline.resttdl.mapper.ApplicationMapper;
 import ru.anyline.resttdl.mapper.DeveloperMapper;
-import ru.anyline.resttdl.model.Application;
 import ru.anyline.resttdl.model.Developer;
 import ru.anyline.resttdl.repository.DeveloperRepo;
 
@@ -16,7 +13,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class DeveloperService {
+public class DeveloperServiceImpl {
 
     private final DeveloperRepo developerRepo;
 

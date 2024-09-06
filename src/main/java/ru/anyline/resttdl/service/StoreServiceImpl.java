@@ -2,11 +2,8 @@ package ru.anyline.resttdl.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.anyline.resttdl.DTO.ApplicationDTO;
 import ru.anyline.resttdl.DTO.StoreDTO;
-import ru.anyline.resttdl.mapper.ApplicationMapper;
 import ru.anyline.resttdl.mapper.StoreMapper;
-import ru.anyline.resttdl.model.Application;
 import ru.anyline.resttdl.model.Store;
 import ru.anyline.resttdl.repository.StoreRepo;
 
@@ -17,7 +14,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class StoreService {
+public class StoreServiceImpl {
 
     private final StoreRepo storeRepo;
 

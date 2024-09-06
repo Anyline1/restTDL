@@ -3,8 +3,7 @@ package ru.anyline.resttdl.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.anyline.resttdl.DTO.DeveloperDTO;
-import ru.anyline.resttdl.model.Developer;
-import ru.anyline.resttdl.service.DeveloperService;
+import ru.anyline.resttdl.service.DeveloperServiceImpl;
 
 import java.util.List;
 
@@ -12,9 +11,9 @@ import java.util.List;
 @RequestMapping("/api/developers")
 public class DeveloperController {
 
-    private final DeveloperService developerService;
+    private final DeveloperServiceImpl developerService;
 
-    public DeveloperController(DeveloperService developerService) {
+    public DeveloperController(DeveloperServiceImpl developerService) {
         this.developerService = developerService;
     }
 

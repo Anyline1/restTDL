@@ -3,8 +3,7 @@ package ru.anyline.resttdl.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.anyline.resttdl.DTO.CompanyDTO;
-import ru.anyline.resttdl.model.Company;
-import ru.anyline.resttdl.service.CompanyService;
+import ru.anyline.resttdl.service.CompanyServiceImpl;
 
 import java.util.List;
 
@@ -12,9 +11,9 @@ import java.util.List;
 @RequestMapping("/api/companies")
 public class CompanyController {
 
-    private final CompanyService companyService;
+    private final CompanyServiceImpl companyService;
 
-    public CompanyController(CompanyService companyService) {
+    public CompanyController(CompanyServiceImpl companyService) {
         this.companyService = companyService;
     }
 

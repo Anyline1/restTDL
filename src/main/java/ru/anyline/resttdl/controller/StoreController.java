@@ -3,8 +3,7 @@ package ru.anyline.resttdl.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.anyline.resttdl.DTO.StoreDTO;
-import ru.anyline.resttdl.model.Store;
-import ru.anyline.resttdl.service.StoreService;
+import ru.anyline.resttdl.service.StoreServiceImpl;
 
 import java.util.List;
 
@@ -12,9 +11,9 @@ import java.util.List;
 @RequestMapping("/api/store")
 public class StoreController {
 
-    private final StoreService storeService;
+    private final StoreServiceImpl storeService;
 
-    public StoreController(StoreService storeService) {
+    public StoreController(StoreServiceImpl storeService) {
         this.storeService = storeService;
     }
 
