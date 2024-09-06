@@ -1,5 +1,6 @@
 package ru.anyline.resttdl.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.anyline.resttdl.DTO.ApplicationDTO;
 import ru.anyline.resttdl.DTO.DeveloperDTO;
@@ -13,14 +14,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 public class DeveloperService {
 
     private final DeveloperRepo developerRepo;
-
-    public DeveloperService(DeveloperRepo developerRepo) {
-        this.developerRepo = developerRepo;
-    }
 
     public List<DeveloperDTO> findAll() {
         return developerRepo.findAll()

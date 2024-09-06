@@ -1,6 +1,7 @@
 package ru.anyline.resttdl.service;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.anyline.resttdl.DTO.ApplicationDTO;
 import ru.anyline.resttdl.mapper.ApplicationMapper;
@@ -11,14 +12,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
+@AllArgsConstructor
 @Service
-public class ApplicationService {
+public class ApplicationService{
 
     private final ApplicationRepo applicationRepo;
-
-    public ApplicationService(ApplicationRepo applicationRepo) {
-        this.applicationRepo = applicationRepo;
-    }
 
     public List<ApplicationDTO> findAll() {
         return applicationRepo.findAll()
