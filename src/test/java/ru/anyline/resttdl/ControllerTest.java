@@ -66,6 +66,27 @@ public class ControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
+
+    @Test
+    public void shouldHandleLargeApplicationIds() throws Exception {
+        Long largeAppId = 999999999999999999L;
+        when(applicationService.findById(largeAppId)).thenReturn(Optional.empty());
+
+        mockMvc.perform(delete("/api/applications/" + largeAppId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void shouldReturn404NotFoundWhenRequestingApplicationWithNegativeId() throws Exception {
+        Long negativeAppId = -1L;
+        when(applicationService.findById(negativeAppId)).thenReturn(Optional.empty());
+
+        mockMvc.perform(delete("/api/applications/" + negativeAppId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
 }
 
 
